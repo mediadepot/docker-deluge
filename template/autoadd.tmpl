@@ -1,0 +1,83 @@
+{
+  "file": 1,
+  "format": 1
+}{
+  "watchdirs": {
+#set $ndx = 1
+#for $key, $value in $folder_structure.items()
+
+    "$ndx": {
+      "max_download_speed": 0.0,
+      "move_completed_path": "/mnt/finished/$value.folder_name",
+      "remove_at_ratio_toggle": true,
+      "label_toggle": true,
+      "max_upload_slots": 0,
+      "download_location_toggle": false,
+      "append_extension_toggle": false,
+      "stop_at_ratio_toggle": true,
+      "move_completed_toggle": true,
+      "max_connections": 0,
+      "max_upload_speed_toggle": false,
+      "auto_managed_toggle": false,
+      "max_connections_toggle": false,
+      "download_location": "/mnt/processing",
+      "label": "$value.label",
+      "max_upload_speed": 0.0,
+      "max_download_speed_toggle": false,
+      "stop_ratio_toggle": true,
+      "auto_managed": true,
+      "abspath": "/mnt/blackhole/$value.folder_name",
+      "add_paused_toggle": false,
+      "stop_at_ratio": true,
+      "move_completed": true,
+      "path": "/mnt/blackhole/$value.folder_name",
+      "append_extension": ".added",
+      "add_paused": true,
+      "queue_to_top_toggle": false,
+      "queue_to_top": true,
+      "enabled": true,
+      "remove_at_ratio": false,
+      "stop_ratio": 0.10000000149011612,
+      "max_upload_slots_toggle": false
+    },
+#set $ndx = $ndx + 1
+#end for
+
+    "$ndx": {
+      "max_download_speed": 0.0,
+      "move_completed_path": "/mnt/finished",
+      "remove_at_ratio_toggle": false,
+      "label_toggle": false,
+      "max_upload_slots": 0,
+      "download_location_toggle": false,
+      "append_extension_toggle": false,
+      "stop_at_ratio_toggle": false,
+      "move_completed_toggle": true,
+      "max_connections": 0,
+      "max_upload_speed_toggle": false,
+      "auto_managed_toggle": false,
+      "max_connections_toggle": false,
+      "download_location": "/mnt/processing",
+      "label": "",
+      "max_upload_speed": 0.0,
+      "max_download_speed_toggle": false,
+      "stop_ratio_toggle": false,
+      "auto_managed": true,
+      "abspath": "/mnt/blackhole",
+      "add_paused_toggle": false,
+      "stop_at_ratio": false,
+      "move_completed": true,
+      "path": "/mnt/blackhole",
+      "append_extension": ".added",
+      "add_paused": true,
+      "queue_to_top_toggle": false,
+      "queue_to_top": true,
+      "enabled": true,
+      "remove_at_ratio": true,
+      "stop_ratio": 0.0,
+      "max_upload_slots_toggle": false
+    }
+  },
+#set $ndx = $ndx + 1
+  "next_id": $ndx
+}
