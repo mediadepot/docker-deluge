@@ -41,10 +41,12 @@ pickle.dump(data, data_file)
 HEREDOC
 	cheetah fill --oext conf --pickle /srv/deluge/config/data.pkl /srv/deluge/config/autoadd
 	cheetah fill --oext conf --env --pickle /srv/deluge/config/data.pkl /srv/deluge/config/web
+	chown -R depot:depot /srv/deluge
+
 fi
 
 rm -f /srv/deluge/data/deluged.pid
 
-deluged -c /srv/deluge/config -L info -l /srv/deluge/data/deluged.log
+su -c "deluged -c /srv/deluge/config -L info -l /srv/deluge/data/deluged.log" depot
 
-deluge-web -c /srv/deluge/config -L info -l /srv/deluge/data/deluge-web.log
+su -c "deluge-web -c /srv/deluge/config -L info -l /srv/deluge/data/deluge-web.log" depot

@@ -1,6 +1,9 @@
 FROM debian:jessie
 MAINTAINER jason@thesparktree.com
 
+#Create internal depot user (which will be mapped to external DEPOT_USER, with the uid and gid values)
+RUN groupadd -g 15000 -r depot && useradd --uid 15000 -r -g depot depot
+
 #Install base applications + deps
 RUN apt-get -q update && \
     apt-get install -qy --force-yes python-cheetah deluged deluge-webui curl && \
@@ -18,9 +21,9 @@ RUN mkdir -p /srv/deluge/config && \
     mkdir -p /mnt/blackhole/[Movies] && \
     mkdir -p /mnt/blackhole/[Music] && \
     mkdir -p /mnt/processing && \
-    mkdir -p /mnt/finished/[Tvshows] && \
-    mkdir -p /mnt/finished/[Movies] && \
-    mkdir -p /mnt/finished/[Music]
+    mkdir -p /mnt/downloads/[Tvshows] && \
+    mkdir -p /mnt/downloads/[Movies] && \
+    mkdir -p /mnt/downloads/[Music]
 
 
 #Copy over start script and docker-gen files

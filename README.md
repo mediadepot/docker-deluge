@@ -1,28 +1,36 @@
 # Requirements
 
 
-# Parameters
-The following environmental variables must be populated. 
+# Environmental
+The following environmental variables must be populated, when running container 
 
-DELUGE_WEB_LISTEN_PORT
-DEPOT_USER,
-DEPOT_PASSWORD
+- DEPOT_USER,
+- DEPOT_PASSWORD
+- DEPOT_PASSWORD_SALT
+- PUSHOVER_USER_KEY
 
-DEPOT_PASSWORD_SALT
+# Ports
+The following ports must be mapped, when running container 
 
-PUSHOVER_USER_KEY
-
-
+ - 8081 #webui listen 
+ - 6881-6891 #daemon listen ports
+ 
 # Volumes
+The following volumes must be mapped, when running container 
 
+- /srv/deluge/config
+- /srv/deluge/data
 
-/mnt/blackhole
-/mnt/blackhole/[Tvshows]
-/mnt/blackhole/[Movies]
-/mnt/blackhole/[Music]
+- /mnt/blackhole
+- /mnt/processing
+- /mnt/downloads
 
-/mnt/processing
+The following subfolders should exist in the above mapped volumes:
 
-/mnt/finished/[Tvshows]
-/mnt/finished/[Movies]
-/mnt/finished/[Music]
+- /mnt/blackhole/[Tvshows]
+- /mnt/blackhole/[Movies]
+- /mnt/blackhole/[Music]
+- /mnt/downloads/[Tvshows]
+- /mnt/downloads/[Movies]
+- /mnt/downloads/[Music]
+
