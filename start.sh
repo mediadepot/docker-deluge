@@ -5,7 +5,12 @@ if [ ! -f /srv/deluge/config/core.conf ]; then
 	cheetah fill --oext conf --env /srv/deluge/config/core
 	cheetah fill --oext conf --env /srv/deluge/config/label
 	cheetah fill --oext conf --env /srv/deluge/config/scheduler
-	cheetah fill --oext conf --env /srv/deluge/config/auth && mv /srv/deluge/config/auth.conf /srv/deluge/config/auth
+	cheetah fill --oext conf --env /srv/deluge/config/auth
+
+	mv /srv/deluge/tmpl/auth.conf /srv/deluge/config/auth
+	mv /srv/deluge/tmpl/core.conf /srv/deluge/config/core.conf
+	mv /srv/deluge/tmpl/label.conf /srv/deluge/config/label.conf
+	mv /srv/deluge/tmpl/scheduler.conf /srv/deluge/config/scheduler.conf
 
 	#do web and autoadd last, they require some extra data which we're going to generate
 	python <<-HEREDOC

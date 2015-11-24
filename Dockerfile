@@ -15,26 +15,23 @@ RUN apt-get -q update && \
 #Create deluge folder structure & set as volumes
 RUN mkdir -p /srv/deluge/config && \
 	mkdir -p /srv/deluge/data && \
+	mkdir -p /srv/deluge/tmpl && \
 
 	# create deluge storage structure
-    mkdir -p /mnt/blackhole/[Tvshows] && \
-    mkdir -p /mnt/blackhole/[Movies] && \
-    mkdir -p /mnt/blackhole/[Music] && \
+    mkdir -p /mnt/blackhole && \
     mkdir -p /mnt/processing && \
-    mkdir -p /mnt/downloads/[Tvshows] && \
-    mkdir -p /mnt/downloads/[Movies] && \
-    mkdir -p /mnt/downloads/[Music]
+    mkdir -p /mnt/downloads
 
 
 #Copy over start script and docker-gen files
 ADD ./start.sh /srv/start.sh
 RUN chmod u+x  /srv/start.sh
-ADD ./template/auth.tmpl /srv/deluge/config/auth.tmpl
-ADD ./template/autoadd.tmpl /srv/deluge/config/autoadd.tmpl
-ADD ./template/core.tmpl /srv/deluge/config/core.tmpl
-ADD ./template/label.tmpl /srv/deluge/config/label.tmpl
-ADD ./template/scheduler.tmpl /srv/deluge/config/scheduler.tmpl
-ADD ./template/web.tmpl /srv/deluge/config/web.tmpl
+ADD ./template/auth.tmpl /srv/deluge/tmpl/auth.tmpl
+ADD ./template/autoadd.tmpl /srv/deluge/tmpl/autoadd.tmpl
+ADD ./template/core.tmpl /srv/deluge/tmpl/core.tmpl
+ADD ./template/label.tmpl /srv/deluge/tmpl/label.tmpl
+ADD ./template/scheduler.tmpl /srv/deluge/tmpl/scheduler.tmpl
+ADD ./template/web.tmpl /srv/deluge/tmpl/web.tmpl
 
 VOLUME ["/srv/deluge/config", "/srv/deluge/data"]
 
