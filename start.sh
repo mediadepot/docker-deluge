@@ -2,10 +2,10 @@
 if [ ! -f /srv/deluge/config/core.conf ]; then
 	#generate the deluge config files
 
-	cheetah fill --oext conf --env /srv/deluge/config/core
-	cheetah fill --oext conf --env /srv/deluge/config/label
-	cheetah fill --oext conf --env /srv/deluge/config/scheduler
-	cheetah fill --oext conf --env /srv/deluge/config/auth
+	cheetah fill --oext conf --env /srv/deluge/tmpl/core
+	cheetah fill --oext conf --env /srv/deluge/tmpl/label
+	cheetah fill --oext conf --env /srv/deluge/tmpl/scheduler
+	cheetah fill --oext conf --env /srv/deluge/tmpl/auth
 
 	mv /srv/deluge/tmpl/auth.conf /srv/deluge/config/auth
 	mv /srv/deluge/tmpl/core.conf /srv/deluge/config/core.conf
@@ -17,12 +17,12 @@ if [ ! -f /srv/deluge/config/core.conf ]; then
 import hashlib
 import pickle
 
-data = ("$DEPOT_PASSWORD_SALT" + "$DEPOT_PASSWORD").encode('ascii')
+data = ("$DELUGE_PASSWORD_SALT" + "$DEPOT_PASSWORD").encode('ascii')
 h = hashlib.new('sha1', data)
 password_hash = h.hexdigest()
 
 print "Write data for autoadd plugin and web.conf"
-data_file = open('/srv/deluge/config/data.pkl', 'w+')
+data_file = open('/srv/deluge/tmpl/data.pkl', 'w+')
 data = {
 
 	'password_hash': password_hash,
@@ -44,8 +44,12 @@ data = {
 pickle.dump(data, data_file)
 
 HEREDOC
-	cheetah fill --oext conf --pickle /srv/deluge/config/data.pkl /srv/deluge/config/autoadd
-	cheetah fill --oext conf --env --pickle /srv/deluge/config/data.pkl /srv/deluge/config/web
+	cheetah fill --oext conf --pickle /srv/deluge/tmpl/data.pkl /srv/deluge/tmpl/autoadd
+	cheetah fill --oext conf --env --pickle /srv/deluge/tmpl/data.pkl /srv/deluge/tmpl/web
+	mv /srv/deluge/tmpl/web.conf /srv/deluge/config/web.conf
+	mv /srv/deluge/tmpl/autoadd.conf /srv/deluge/config/autoadd.conf
+
+
 	chown -R depot:depot /srv/deluge
 
 fi
