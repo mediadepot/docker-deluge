@@ -27,10 +27,10 @@ The following volumes must be mapped, when running container
 
 The following subfolders should exist in the above mapped volumes:
 
-- /mnt/blackhole/[Tvshows]
-- /mnt/blackhole/[Movies]
-- /mnt/blackhole/[Music]
-- /mnt/downloads/[Tvshows]
-- /mnt/downloads/[Movies]
-- /mnt/downloads/[Music]
+- /mnt/blackhole/tvshows
+- /mnt/blackhole/movies
+- /mnt/blackhole/music
+- /mnt/downloads/tvshows
+- /mnt/downloads/movies
+- /mnt/downloads/music
 

@@ -16,30 +16,22 @@ if [ ! -f /srv/deluge/config/core.conf ]; then
 	python <<-HEREDOC
 import hashlib
 import pickle
+import os
 
 data = ("$DELUGE_PASSWORD_SALT" + "$DEPOT_PASSWORD").encode('ascii')
 h = hashlib.new('sha1', data)
 password_hash = h.hexdigest()
+
+# find all common directories in the downloads folder and the blackhole folder
+download_subfolders = [os.path.basename(x[0]) for x in os.walk('/mnt/downloads')]
+blackhole_subfolders = [os.path.basename(x[0]) for x in os.walk('/mnt/blackhole')]
 
 print "Write data for autoadd plugin and web.conf"
 data_file = open('/srv/deluge/tmpl/data.pkl', 'w+')
 data = {
 
 	'password_hash': password_hash,
-	'folder_structure': {
-		'tvshows': {
-			'folder_name': "[Tvshows]",
-			'label': "tvshows"
-		},
-		"movies": {
-			'folder_name': "[Movies]",
-			'label': "movies"
-		},
-		"music": {
-			'folder_name': "[Music]",
-			'label': "music"
-		}
-	}
+	'mapped_folders': list(set(download_subfolders).intersection(blackhole_subfolders))
 }
 pickle.dump(data, data_file)
 

@@ -4,11 +4,11 @@
 }{
   "watchdirs": {
 #set $ndx = 1
-#for $key, $value in $folder_structure.items()
+#for $key in $mapped_folders.items()
 
     "$ndx": {
       "max_download_speed": 0.0,
-      "move_completed_path": "/mnt/downloads/$value.folder_name",
+      "move_completed_path": "/mnt/downloads/$key",
       "remove_at_ratio_toggle": true,
       "label_toggle": true,
       "max_upload_slots": 0,
@@ -21,16 +21,16 @@
       "auto_managed_toggle": false,
       "max_connections_toggle": false,
       "download_location": "/mnt/processing",
-      "label": "$value.label",
+      "label": "$key",
       "max_upload_speed": 0.0,
       "max_download_speed_toggle": false,
       "stop_ratio_toggle": true,
       "auto_managed": true,
-      "abspath": "/mnt/blackhole/$value.folder_name",
+      "abspath": "/mnt/blackhole/$key",
       "add_paused_toggle": false,
       "stop_at_ratio": true,
       "move_completed": true,
-      "path": "/mnt/blackhole/$value.folder_name",
+      "path": "/mnt/blackhole/$key",
       "append_extension": ".added",
       "add_paused": true,
       "queue_to_top_toggle": false,
