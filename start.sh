@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 if [ ! -f /srv/deluge/config/core.conf ]; then
 	#generate the deluge config files
 
@@ -36,15 +37,18 @@ data = {
 pickle.dump(data, data_file)
 
 HEREDOC
-	cheetah fill --oext conf --pickle /srv/deluge/tmpl/data.pkl /srv/deluge/tmpl/autoadd
 	cheetah fill --oext conf --env --pickle /srv/deluge/tmpl/data.pkl /srv/deluge/tmpl/web
 	mv /srv/deluge/tmpl/web.conf /srv/deluge/config/web.conf
-	mv /srv/deluge/tmpl/autoadd.conf /srv/deluge/config/autoadd.conf
-
-
-	chown -R depot:depot /srv/deluge
-
 fi
+
+
+rm -f "/srv/deluge/config/autoadd.conf"
+rm -f "/srv/deluge/config/autoadd.conf~"
+
+cheetah fill --oext conf --pickle /srv/deluge/tmpl/data.pkl /srv/deluge/tmpl/autoadd
+mv /srv/deluge/tmpl/autoadd.conf /srv/deluge/config/autoadd.conf
+chown -R depot:depot /srv/deluge
+
 
 rm -f /srv/deluge/data/deluged.pid
 
