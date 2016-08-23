@@ -45,6 +45,7 @@ fi
 rm -f "/srv/deluge/config/autoadd.conf"
 rm -f "/srv/deluge/config/autoadd.conf~"
 
+echo "re-generating autoadd file"
 cheetah fill --oext conf --pickle /srv/deluge/tmpl/data.pkl /srv/deluge/tmpl/autoadd
 mv /srv/deluge/tmpl/autoadd.conf /srv/deluge/config/autoadd.conf
 chown -R depot:depot /srv/deluge
